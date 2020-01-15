@@ -1,0 +1,6 @@
+alias ll='ls -lG'
+alias su='su -l'
+alias uz='gunzip -c'
+alias vi=`echo $EDITOR`
+alias vim=`echo $EDITOR`
+

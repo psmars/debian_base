@@ -1,0 +1,42 @@
+nnoremap ; :
+nnoremap : ;
+imap <leader>' ''<ESC>i
+imap <leader>" ""<ESC>i
+imap <leader>( ()<ESC>i
+imap <leader>[ []<ESC>i
+imap <leader>{ <ESC>$a<Enter>{<Enter>}<ESC>ko<Tab>
+let mapleader=","
+map <F3> ;set invnumber<CR>
+map <F4> ;setlocal spell! spelllang=en_gb<CR>
+map <F5> ;setlocal spell! spelllang=fr<CR>
+map <Leader> <Plug>(easymotion-prefix)
+nmap <C-s> ^d0i
+nmap <leader>n ;NERDTreeToggle<Enter>
+nmap <leader>N ;set invnumber<Enter>;set rnu!<Enter>
+nmap <Space> i_<Esc>r
+nnoremap <Leader>cxx :-1read $HOME/.config/nvim/skeleton.cxx<CR>20jzzO
+nnoremap <Leader>html :-1read $HOME/.config/nvim/skeleton.html<CR>4jwf>a
+nnoremap <Leader>php :-1read $HOME/.config/nvim/skeleton.php<CR>8jwf>a
+nnoremap <Leader>latex :-1read $HOME/.config/nvim/skeleton.latex<CR>2jO
+
+no <down> <Nop>
+no <left> <C-W>h
+no <right> <C-W>l
+no <up> <Nop>
+no <BS> <Nop>
+no <PageUp> <Nop>
+no <PageDown> <Nop>
+ino <down> <Nop>
+ino <left> <Nop>
+ino <right> <nop>
+ino <up> <Nop>
+ino <BS> <Nop>
+ino <PageUp> <Nop>
+ino <PageDown> <Nop>
+vno <down> <Nop>
+vno <left> <Nop>
+vno <right> <nop>
+vno <up> <Nop>
+vno <BS> <Nop>
+vno <PageUp> <Nop>
+vno <PageDown> <Nop>
