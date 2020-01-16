@@ -1,6 +1,6 @@
 FROM debian:stable-slim
 MAINTAINER Pierre SMARS
-LABEL tw.edu.yuntech.smars.version="0.1" \
+LABEL tw.edu.yuntech.smars.version="0.4" \
       tw.edu.yuntech.smars.release-date="2020-01-16"
 RUN sed -i 's,path-exclude.*man,#erased line (absps points_forces),g' /etc/dpkg/dpkg.cfg.d/docker && \
 	sed -i 's,path-exclude.*groff,#erased line (absps points_forces),g' /etc/dpkg/dpkg.cfg.d/docker
