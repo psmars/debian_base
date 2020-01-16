@@ -24,7 +24,7 @@ RUN apt-get update && \
 	screen \
 	dos2unix \
 	rlwrap
-	
+RUN ap-get install --reinstall coreutils
 COPY .zshrc \
 	.screenrc \
 	.alias \
