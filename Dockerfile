@@ -1,7 +1,7 @@
 FROM debian:stable-slim 
 MAINTAINER Pierre SMARS
-LABEL tw.edu.yuntech.smars.version="0.7" \
-      tw.edu.yuntech.smars.release-date="2020-01-18"
+LABEL tw.edu.yuntech.smars.version="0.8" \
+      tw.edu.yuntech.smars.release-date="2020-01-19"
 RUN echo 'path-include /usr/share/man/man*' >> /etc/dpkg/dpkg.cfg.d/docker && \
 	sed -i 's,path-exclude.*groff,#erased line (absps points_forces),g' /etc/dpkg/dpkg.cfg.d/docker
 ARG DEBIAN_FRONTEND=noninteractive
@@ -33,7 +33,7 @@ COPY config /usr/share/absps/config
 
 ENV EDITOR="/usr/bin/nvim"
 RUN find /root -type f -exec chmod 0640 {} \; && \
-	chmod 0700 /root/config/install
+	chmod 0700 /usr/share/absps/config/install 
 WORKDIR /root
 CMD /usr/share/absps/config/install && \
 	/bin/zsh
