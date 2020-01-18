@@ -1,9 +1,10 @@
 FROM debian:stable-slim
 MAINTAINER Pierre SMARS
-LABEL tw.edu.yuntech.smars.version="0.4" \
-      tw.edu.yuntech.smars.release-date="2020-01-16"
+LABEL tw.edu.yuntech.smars.version="0.5" \
+      tw.edu.yuntech.smars.release-date="2020-01-18"
 RUN sed -i 's,path-exclude.*man,#erased line (absps points_forces),g' /etc/dpkg/dpkg.cfg.d/docker && \
 	sed -i 's,path-exclude.*groff,#erased line (absps points_forces),g' /etc/dpkg/dpkg.cfg.d/docker
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
 	apt-get install -y \
 	zsh \
@@ -24,7 +25,10 @@ RUN apt-get update && \
 	screen \
 	dos2unix \
 	rlwrap
-RUN apt-get install --reinstall coreutils
+RUN apt-get install --reinstall \ 
+	coreutils \
+	mawk \
+	sed
 COPY .zshrc \
 	.screenrc \
 	.alias \
