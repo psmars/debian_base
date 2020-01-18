@@ -1,6 +1,6 @@
-FROM debian:stable-slim
+FROM debian:stable-slim 
 MAINTAINER Pierre SMARS
-LABEL tw.edu.yuntech.smars.version="0.6" \
+LABEL tw.edu.yuntech.smars.version="0.7" \
       tw.edu.yuntech.smars.release-date="2020-01-18"
 RUN echo 'path-include /usr/share/man/man*' >> /etc/dpkg/dpkg.cfg.d/docker && \
 	sed -i 's,path-exclude.*groff,#erased line (absps points_forces),g' /etc/dpkg/dpkg.cfg.d/docker
@@ -29,13 +29,11 @@ RUN apt-get install --reinstall \
 	coreutils \
 	mawk \
 	sed
-COPY .zshrc \
-	.screenrc \
-	.alias \
-	/root/
-COPY .config /root/.config
+COPY config /root/config
 
 ENV EDITOR="/usr/bin/nvim"
-RUN find /root -type f -exec chmod 0640 {} \;
+RUN find /root -type f -exec chmod 0640 {} \; && \
+	chmod 0700 /root/config/install
 WORKDIR /root
-CMD /bin/zsh
+CMD /root/config/install && \
+	/bin/zsh

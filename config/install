@@ -1,0 +1,14 @@
+#!/bin/zsh
+if test ! -e /root/.alias; then
+	cp /root/config/.alias /root/
+fi
+if test ! -e /root/.zshrc; then
+	cp /root/config/.zshrc /root/
+fi
+if test ! -e /root/.screenrc; then
+	cp /root/config/.screenrc /root/
+fi
+if test ! -e /root/.config; then
+	cp -r /root/config/.config /root/
+fi
+
