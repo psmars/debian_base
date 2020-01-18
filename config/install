@@ -1,14 +1,17 @@
 #!/bin/zsh
 if test ! -e /root/.alias; then
-	cp /root/config/.alias /root/
+	cp /usr/share/absps/config/.alias /root/
 fi
 if test ! -e /root/.zshrc; then
-	cp /root/config/.zshrc /root/
+	cp /usr/share/absps/config/.zshrc /root/
 fi
 if test ! -e /root/.screenrc; then
-	cp /root/config/.screenrc /root/
+	cp /usr/share/absps/config/.screenrc /root/
 fi
 if test ! -e /root/.config; then
-	cp -r /root/config/.config /root/
+	cp -r /usr/share/absps/config/.config /root/
+fi
+if test ! -e /root/.gitignore; then
+	cp -r /usr/share/absps/config/.gitignore /root/
 fi
 

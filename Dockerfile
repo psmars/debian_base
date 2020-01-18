@@ -29,11 +29,11 @@ RUN apt-get install --reinstall \
 	coreutils \
 	mawk \
 	sed
-COPY config /root/config
+COPY config /usr/share/absps/config
 
 ENV EDITOR="/usr/bin/nvim"
 RUN find /root -type f -exec chmod 0640 {} \; && \
 	chmod 0700 /root/config/install
 WORKDIR /root
-CMD /root/config/install && \
+CMD /usr/share/absps/config/install && \
 	/bin/zsh
