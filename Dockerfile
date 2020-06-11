@@ -12,6 +12,7 @@ RUN apt-get update && \
 	less \
 	usbutils \
 	cpuinfo \
+	procps \
 	htop \
 	sudo \
 	neovim \
