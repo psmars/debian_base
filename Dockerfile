@@ -14,6 +14,7 @@ RUN apt-get update && \
 	cpuinfo \
 	procps \
 	htop \
+	iputils-ping \
 	sudo \
 	neovim \
 	git \
