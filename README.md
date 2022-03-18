@@ -28,3 +28,9 @@ A rather small personalised docker image based on Debian.
 - vim
 - screen
 - zsh
+
+## Running
+
+Example:
+
+docker run --rm -it --hostname debian_base -v <your_directory>:/root absps/debian_base
