@@ -1,12 +1,13 @@
 FROM debian:stable-slim 
 MAINTAINER Pierre SMARS
-LABEL tw.edu.yuntech.smars.version="0.10" \
-      tw.edu.yuntech.smars.release-date="2020-06-11"
+LABEL tw.edu.yuntech.smars.version="0.11" \
+      tw.edu.yuntech.smars.release-date="2022-03-18"
 RUN echo 'path-include /usr/share/man/man*' >> /etc/dpkg/dpkg.cfg.d/docker && \
 	sed -i 's,path-exclude.*groff,#erased line (absps points_forces),g' /etc/dpkg/dpkg.cfg.d/docker
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
 	apt-get install -y \
+	apt-utils \
 	zsh \
 	zsh-syntax-highlighting \
 	less \
