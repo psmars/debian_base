@@ -297,7 +297,7 @@ function! MakeTexFolds(force, manual)
 					" In other words, the pattern is safe, but not exact.
 					call AddSyntaxFoldItem('^\s*\\'.s.'{[^{}]*$','^[^}]*}',0,0)
 				else
-					if s =~ 'itemize\|enumerate\|description'
+					if s =~ 'itemize\|enumerate\|description\|align\|gather'
 						" These environments can nest.
 						call AddSyntaxFoldItem('^\s*\\begin{'.s,'\(^\|\s\)\s*\\end{'.s,0,0,'^\s*\\begin{'.s,'\(^\|\s\)\s*\\end{'.s)
 					else
@@ -314,7 +314,7 @@ function! MakeTexFolds(force, manual)
 	if g:Tex_FoldedSections != '' 
 		call Tex_FoldSections(g:Tex_FoldedSections,
 			\ '^\s*\\\%(frontmatter\|mainmatter\|backmatter\)\|'
-			\. '^\s*\\begin{thebibliography\|>>>\|^\s*\\endinput\|'
+			\. '^\s*\\begin{thebibliography\|^\s*\\endinput\|'
 			\. '^\s*\\begin{slide\|^\s*\\\%(begin\|end\){document\|'
 			\. '^\s*\\\%(\%(begin\|end\){appendix}\|appendix\)')
 	endif
@@ -334,7 +334,7 @@ function! MakeTexFolds(force, manual)
 	" {{{ preamble
 	if g:Tex_FoldedMisc =~ '\<preamble\>'
 		call AddSyntaxFoldItem (
-			\ '^\s*\\document\(class\|style\).*{',
+			\ '^\s*\\document\(class\|style\)\>',
 			\ '^\s*\\begin{document}',
 			\ 0,
 			\ -1 

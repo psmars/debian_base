@@ -381,7 +381,7 @@ function! s:Tex_CompleteRefCiteCustom(type)
 		let bibkey = matchstr(getline('.'), '\\bibitem\s*\%(\[.\{-}\]\)\?\s*{\zs.\{-}\ze}')
 		if bibkey == ""
 			" Look for a '@article{bibkey,'
-			let bibkey = matchstr(getline('.'), '@\w*{\zs\w*\ze,')
+			let bibkey = matchstr(getline('.'), '@\w*{\zs.*\ze,')
 		endif
 
 		let completeword = bibkey
@@ -546,7 +546,7 @@ endfunction " }}}
 " as soon as the first \bibliography or \begin{thebibliography} is found.
 function! Tex_ScanFileForCite(prefix)
 	call Tex_Debug('+Tex_ScanFileForCite: searching for bibkeys.', 'view')
-	let bibfiles = Tex_FindBibFiles( 1 )
+	let bibfiles = Tex_FindBibFiles( "", 0 )
 
 	if bibfiles =~ '\S'
 		let i = 1
@@ -589,6 +589,8 @@ function! Tex_ScanFileForCite(prefix)
 
 		return 1
 	endif
+
+	let foundCiteFile = 0
 
 	" If we have a thebibliography environment, then again assume that this is
 	" the only file which defines the bib-keys. And convey this information
@@ -811,15 +813,14 @@ endfunction " }}}
 " ============================================================================== 
 " Tex_FindBibFiles: finds all .bib files used by the current or main file {{{
 " Description: 
-"   a:currfile : if this flag is set, we look in the currently edited file;
-"                otherwise, we load the main file
-function! Tex_FindBibFiles( currfile )
+"   a:filename : we look in this file. If this string is empty, look in the currently edited file
+"   a:recursive: look into included/inputed files
+function! Tex_FindBibFiles( currfile, recursive )
 	call Tex_Debug(":Tex_FindBibFiles: ", "view")
 
-	if !a:currfile
-		let mainfname = Tex_GetMainFileName(':p')
+	if a:currfile !=# ""
 		split
-		exec 'silent! e '.fnameescape(mainfname)
+		exec 'silent! e '.fnameescape(a:currfile)
 	endif
 
 	" No bibfiles found yet
@@ -876,9 +877,31 @@ function! Tex_FindBibFiles( currfile )
 		endif
 	endwhile
 
-	call Tex_Debug(":Tex_FindBibFiles: returning [".bibfiles."]", "view")
+	call Tex_Debug(":Tex_FindBibFiles: in this file: [".bibfiles."]", "view")
 
-	if !a:currfile
+	if a:recursive
+		" Now, search recursively
+
+		" Position the cursor at the start of the file
+		call setpos('.', [0,1,1,0])
+
+		" Accept a match at the very beginning of the file
+		let flags = 'cW'
+
+		while search('^\s*\\\%(input\|include\)', flags)
+			let flags = 'W'
+			let filename = matchstr(getline('.'), '^\s*\\\%(input\|include\){\zs.\{-}\ze}')
+			let foundfile = Tex_FindFile(filename, '.,'.Tex_GetVarValue('Tex_TEXINPUTS'), '.tex')
+			if foundfile != ''
+				call Tex_Debug(':Tex_FindBibFiles: scanning recursively in ['.foundfile.']', 'view')
+				let bibfiles .= Tex_FindBibFiles( foundfile, a:recursive )
+			endif
+		endwhile
+	endif
+
+	call Tex_Debug(":Tex_FindBibFiles: with included files: [".bibfiles."]", "view")
+
+	if a:currfile !=# ""
 		q
 	endif
 
@@ -896,7 +919,7 @@ if Tex_UsePython()
 endif
 
 function! Tex_StartCiteCompletion()
-	let bibfiles = Tex_FindBibFiles( 0 )
+	let bibfiles = Tex_FindBibFiles( Tex_GetMainFileName(':p'), 1 )
 	if bibfiles !~ '\S'
 		call Tex_Debug(':Tex_StartCiteCompletion: No bibfiles found.', 'view')
 		call Tex_SwitchToInsertMode()

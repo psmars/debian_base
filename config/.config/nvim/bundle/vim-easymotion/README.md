@@ -99,7 +99,7 @@ Press `b` to jump to the second "o":
 	Lorem ipsum d<cursor>olor sit amet.
 
 Jeffrey Way of Nettuts+ has also [written
-a tutorial](http://net.tutsplus.com/tutorials/other/vim-essential-plugin-easymotion/)
+a tutorial](https://code.tutsplus.com/tutorials/vim-essential-plugin-easymotion--net-19223)
 about EasyMotion.
 
 New features in version 3.0
@@ -193,7 +193,7 @@ get to your destination.
 
 ### Bidirectional motions
 
-All motions now come in a bidirectional variants (e.g. `<Plug>(easymotion-s)`,
+All motions now come in bidirectional variants (e.g. `<Plug>(easymotion-s)`,
 `<Plug>(easymotion-bd-w)` and so forth).
 By default, you can already jump forward or backward with `<Leader>s`. A useful
 trick is to map `nmap s <Plug>(easymotion-s)` to use `s` instead and save one
@@ -201,7 +201,7 @@ keystroke!
 
 ### 2-character search motion
 
-You can now also perform a 2-character search, similar to [vim-seek](https://github.com/goldfeld/vim-seek)/[vim-sneak](https://github.com/justinmk/vim-sneak) with `<Plug>(easymotion-s2)`. For example you can highlight all words that start with `fu`.
+You can now also perform a 2-character search, similar to [vim-seek](https://github.com/goldfeld/vim-seek)/[vim-sneak](https://github.com/justinmk/vim-sneak) with `<Plug>(easymotion-s2)`. For example, you can highlight all words that start with `fu`.
 
 ![2-key-find-motion](https://f.cloud.github.com/assets/3797062/2039612/7cafcec8-89a5-11e3-8f2c-5f26a6b83efd.gif)
 
@@ -356,6 +356,16 @@ Plugin 'easymotion/vim-easymotion'
 NeoBundle 'easymotion/vim-easymotion'
 ```
 
+### Vim-Plug (https://github.com/junegunn/vim-plug)
+```
+Plug 'easymotion/vim-easymotion'
+```
+
+### Vim8 Native Plugin Manager (https://vimhelp.org/repeat.txt.html#packages)
+```
+git clone https://github.com/easymotion/vim-easymotion.git ~/.vim/pack/plugins/start/vim-easymotion
+```
+
 Minimal Configuration Tutorial
 ------------------------------
 **I recommend configuring and map keys by yourself if you are true Vimmer.**
@@ -391,6 +401,6 @@ Now, all you need to remember is `s` and JK motions bindings, and it's good enou
 
 **`<Leader>j`** & **`<Leader>k`** make it easy to move to the lines.
 
-Of course you can use any key you want instead of `s` such as `<Space>`, `<Leader>s`, etc...
+Of course, you can use any key you want instead of `s` such as `<Space>`, `<Leader>s`, etc...
 
 If you want to use more useful mappings, please see [:h easymotion.txt](https://github.com/easymotion/vim-easymotion/blob/master/doc/easymotion.txt) for more detail.
